@@ -39,7 +39,7 @@ public class NetworkService {
 
     public interface IPing {
         @POST("/TvServerService/Ping.pb")
-        public Call<Ping> SendPing(@Body Ping.PingRequest pingRequest);
+        public Call<Ping.PingRequest> Ping(@Body Ping.PingRequest pingRequest);
     }
 
     public IPing Ping(){
