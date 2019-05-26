@@ -27,16 +27,16 @@ public class MainActivity extends AppCompatActivity {
     public void SendPing(View view) {
 
         Ping.PingRequest pingRequest = Ping.PingRequest.newBuilder().setSequence(1).build();
-        Log.d("+","+");
+        Log.d("+",String.valueOf(pingRequest.getSequence()));
         NetworkService.getInstance()
-                .Ping().Ping(pingRequest).enqueue(new Callback<Ping.PingRequest>() {
+                .Ping().Ping(pingRequest).enqueue(new Callback<Ping.PingResponse>() {
             @Override
-            public void onResponse(Call<Ping.PingRequest> call, Response<Ping.PingRequest> response) {
-                Log.d("response",response.message());
+            public void onResponse(Call<Ping.PingResponse> call, Response<Ping.PingResponse> response) {
+                Log.d("response",String.valueOf(response.body().getSequence()));
             }
 
             @Override
-            public void onFailure(Call<Ping.PingRequest> call, Throwable t) {
+            public void onFailure(Call<Ping.PingResponse> call, Throwable t) {
                 Log.d("response","failure");
             }
         });

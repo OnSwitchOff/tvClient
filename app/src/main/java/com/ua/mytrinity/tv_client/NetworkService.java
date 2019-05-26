@@ -1,5 +1,7 @@
 package com.ua.mytrinity.tv_client;
 
+import android.util.Log;
+
 import com.ua.mytrinity.tv_client.proto.Ping;
 
 import okhttp3.OkHttpClient;
@@ -18,11 +20,11 @@ public class NetworkService {
 
     private NetworkService() {
 
-//        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-//        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//
-//        OkHttpClient.Builder client = new OkHttpClient.Builder()
-//                .addInterceptor(interceptor);
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient.Builder client = new OkHttpClient.Builder()
+                .addInterceptor(interceptor);
 
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -39,7 +41,7 @@ public class NetworkService {
 
     public interface IPing {
         @POST("/TvServerService/Ping.pb")
-        public Call<Ping.PingRequest> Ping(@Body Ping.PingRequest pingRequest);
+        public Call<Ping.PingResponse> Ping(@Body Ping.PingRequest pingRequest);
     }
 
     public IPing Ping(){
